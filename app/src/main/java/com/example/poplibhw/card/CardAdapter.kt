@@ -1,4 +1,4 @@
-package com.example.poplibhw.main
+package com.example.poplibhw.card
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.poplibhw.R
 import com.example.poplibhw.model.GitHubUser
 
-class UserAdapter() :
+class CardAdapter() :
     RecyclerView.Adapter<GithubUserViewHolder>() {
 
-    var users: List<GitHubUser> = emptyList()
+    var user: GitHubUser = emptyList()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
