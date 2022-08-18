@@ -10,8 +10,9 @@ import com.example.poplibhw.R
 import com.example.poplibhw.model.GitHubUser
 
 
-class UserAdapter(private var onItemViewClick: OnItemViewClick) :
-    RecyclerView.Adapter<GitHubUserViewHolder>() {
+class UserAdapter(
+    private var onItemViewClick: OnItemViewClick
+) : RecyclerView.Adapter<UserAdapter.GitHubUserViewHolder>() {
 
     interface OnItemViewClick {
         fun onItemViewClick(user: GitHubUser)
@@ -25,8 +26,9 @@ class UserAdapter(private var onItemViewClick: OnItemViewClick) :
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GitHubUserViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
-        return GitHubUserViewHolder(view)
+        return GitHubUserViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: GitHubUserViewHolder, position: Int) {
@@ -34,15 +36,18 @@ class UserAdapter(private var onItemViewClick: OnItemViewClick) :
     }
 
     override fun getItemCount() = users.size
-}
 
-class GitHubUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val tvLogin by lazy { itemView.findViewById<TextView>(R.id.tvUserLogin) }
+    inner class GitHubUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(item: GitHubUser) = with(item) {
-        tvLogin.text = login
+        private val tvLogin by lazy { itemView.findViewById<TextView>(R.id.tvUserLogin) }
+
+        fun bind(item: GitHubUser) = with(item) {
+            tvLogin.text = login
+            itemView.apply {
+                setOnClickListener { onItemViewClick.onItemViewClick(item) }
+            }
+        }
     }
-
 }
 

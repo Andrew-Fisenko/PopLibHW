@@ -42,13 +42,12 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        gitHubUser = arguments?.getParcelable(GITHUB_USER) ?: GitHubUser(0, "none")
+        gitHubUser = arguments?.getParcelable<GitHubUser>(GITHUB_USER) ?: GitHubUser(1, "Error")
 
     }
 
     override fun initUser(user: GitHubUser) {
         with(viewBingding) {
-
             tvUserCard.text = gitHubUser.login
         }
     }

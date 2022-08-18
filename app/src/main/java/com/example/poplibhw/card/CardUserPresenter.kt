@@ -11,7 +11,7 @@ class CardUserPresenter(
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        repository.getUser()?.let { viewState.initUser(it) }
+        viewState.initUser(repository.getUser())
     }
 
     fun onBackPressed(): Boolean {
