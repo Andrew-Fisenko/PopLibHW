@@ -9,8 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.poplibhw.R
 import com.example.poplibhw.model.GitHubUser
 
-class UserAdapter() :
-    RecyclerView.Adapter<GithubUserViewHolder>() {
+
+class UserAdapter(private var onItemViewClick: OnItemViewClick) :
+    RecyclerView.Adapter<GitHubUserViewHolder>() {
+
+    interface OnItemViewClick {
+        fun onItemViewClick(user: GitHubUser)
+    }
 
     var users: List<GitHubUser> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
@@ -19,19 +24,19 @@ class UserAdapter() :
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GithubUserViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GitHubUserViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
-        return GithubUserViewHolder(view)
+        return GitHubUserViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: GithubUserViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GitHubUserViewHolder, position: Int) {
         holder.bind(users[position])
     }
 
     override fun getItemCount() = users.size
 }
 
-class GithubUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class GitHubUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val tvLogin by lazy { itemView.findViewById<TextView>(R.id.tvUserLogin) }
 
@@ -40,3 +45,4 @@ class GithubUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
 }
+

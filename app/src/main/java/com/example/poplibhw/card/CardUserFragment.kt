@@ -1,15 +1,13 @@
 package com.example.poplibhw.card
 
+import GITHUB_USER
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.poplibhw.core.OnBackPressedListener
 import com.example.poplibhw.PopLibHW
+import com.example.poplibhw.core.OnBackPressedListener
 import com.example.poplibhw.databinding.FragmentUserCardBinding
-import com.example.poplibhw.databinding.FragmentUserListBinding
-import com.example.poplibhw.main.UserAdapter
 import com.example.poplibhw.model.GitHubUser
 import com.example.poplibhw.repositiry.GitHubRepositoryImpl
 import moxy.MvpAppCompatFragment
@@ -18,14 +16,16 @@ import moxy.ktx.moxyPresenter
 class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedListener {
 
     companion object {
-        fun getInstance(): CardUserFragment {
-            return  CardUserFragment()
+        fun getInstance(bundle: Bundle): CardUserFragment {
+            return CardUserFragment().apply {
+                arguments = bundle
+            }
         }
     }
 
-    private lateinit var viewBingding : FragmentUserCardBinding
+    private lateinit var viewBingding: FragmentUserCardBinding
+    private lateinit var gitHubUser: GitHubUser
 
-    private val adapter = CardAdapter()
     private val presenter: CardUserPresenter by moxyPresenter {
         CardUserPresenter(GitHubRepositoryImpl(), PopLibHW.instance.router)
     }
@@ -34,22 +34,23 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return FragmentUserCardBinding.inflate(inflater, container,false).also {
+    ): View {
+        return FragmentUserCardBinding.inflate(inflater, container, false).also {
             viewBingding = it
         }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(viewBingding){
+        gitHubUser = arguments?.getParcelable(GITHUB_USER) ?: GitHubUser(0, "none")
 
-            tvUserCard.text = adapter.user.login
-        }
     }
 
     override fun initUser(user: GitHubUser) {
-        adapter.user = user
+        with(viewBingding) {
+
+            tvUserCard.text = gitHubUser.login
+        }
     }
 
     override fun onBackPressed() = presenter.onBackPressed()

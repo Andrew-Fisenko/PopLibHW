@@ -24,11 +24,15 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener {
 
     private lateinit var viewBingding : FragmentUserListBinding
 
-    private val adapter = UserAdapter()
     private val presenter: UserPresenter by moxyPresenter {
         UserPresenter(GitHubRepositoryImpl(), PopLibHW.instance.router)
     }
 
+    private val adapter = UserAdapter(object : UserAdapter.OnItemViewClick {
+        override fun onItemViewClick(user: GitHubUser) {
+            presenter.openCardUser(user)
+        }
+    })
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,8 +46,8 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(viewBingding){
-            rvGitHubUsers.layoutManager = LinearLayoutManager(requireContext())
-            rvGitHubUsers.adapter = adapter
+            this.rvGitHubUsers.layoutManager = LinearLayoutManager(requireContext())
+            this.rvGitHubUsers.adapter = adapter
         }
     }
 

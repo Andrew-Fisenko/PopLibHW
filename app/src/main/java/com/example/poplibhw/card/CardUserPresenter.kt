@@ -4,20 +4,18 @@ import com.example.poplibhw.repositiry.GitHubRepository
 import com.github.terrakok.cicerone.Router
 import moxy.MvpPresenter
 
-class CardUserPresenter (
+class CardUserPresenter(
     private val repository: GitHubRepository,
     private val router: Router
-
-) : MvpPresenter<CardUserView> () {
+) : MvpPresenter<CardUserView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.initUser(repository.getUser())
+        repository.getUser()?.let { viewState.initUser(it) }
     }
 
     fun onBackPressed(): Boolean {
         router.exit()
         return true
     }
-
 }
