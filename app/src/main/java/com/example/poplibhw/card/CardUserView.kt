@@ -8,4 +8,7 @@ import moxy.viewstate.strategy.StateStrategyType
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface CardUserView : MvpView {
     fun initUser(user: GitHubUser)
+    fun showLoading()
+    fun hideLoading()
+    fun showError()
 }

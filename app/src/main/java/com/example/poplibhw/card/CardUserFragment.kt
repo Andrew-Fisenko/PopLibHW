@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.poplibhw.PopLibHW
 import com.example.poplibhw.core.OnBackPressedListener
 import com.example.poplibhw.databinding.FragmentUserCardBinding
@@ -43,13 +44,27 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         gitHubUser = arguments?.getParcelable<GitHubUser>(GITHUB_USER) ?: GitHubUser(1, "Error")
-
+        showLoading()
     }
 
     override fun initUser(user: GitHubUser) {
         with(viewBingding) {
             tvUserCard.text = gitHubUser.login
         }
+    }
+
+    override fun showLoading() = with(viewBingding) {
+        progress.visibility = View.VISIBLE
+        frame.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() = with(viewBingding) {
+        progress.visibility = View.GONE
+        frame.visibility = View.GONE
+    }
+
+    override fun showError() {
+        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
     }
 
     override fun onBackPressed() = presenter.onBackPressed()

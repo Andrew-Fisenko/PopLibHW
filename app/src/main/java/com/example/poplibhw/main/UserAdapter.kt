@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.poplibhw.R
 import com.example.poplibhw.model.GitHubUser
 
-
 class UserAdapter(
     private var onItemViewClick: OnItemViewClick
 ) : RecyclerView.Adapter<UserAdapter.GitHubUserViewHolder>() {
@@ -36,7 +35,6 @@ class UserAdapter(
     }
 
     override fun getItemCount() = users.size
-
 
     inner class GitHubUserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
