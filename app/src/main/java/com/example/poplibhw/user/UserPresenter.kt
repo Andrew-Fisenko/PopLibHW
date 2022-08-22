@@ -41,12 +41,11 @@ class UserPresenter (
 
     fun openCardUser(user: GitHubUser) {
         router.navigateTo(CardUserScreen(user))
-        Toast.makeText(PopLibHW.instance, user.login, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(PopLibHW.instance, user.login, Toast.LENGTH_SHORT).show()
     }
 
     fun onBackPressed(): Boolean {
         router.exit()
         return true
     }
-
 }

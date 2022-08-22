@@ -64,7 +64,7 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
     }
 
     override fun showError() {
-        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Error! Coming back...", Toast.LENGTH_SHORT).show()
     }
 
     override fun onBackPressed() = presenter.onBackPressed()

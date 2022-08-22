@@ -1,5 +1,7 @@
 package com.example.poplibhw.card
 
+import android.os.Handler
+import android.os.Looper
 import com.example.poplibhw.repositiry.GitHubRepository
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -15,18 +17,19 @@ class CardUserPresenter(
         super.onFirstViewAttach()
         viewState.showLoading()
         repository.getUser()
-            .delay(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
+            .delay(2, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
             .subscribe(
                 {
                     viewState.initUser(it)
                     viewState.hideLoading()
                 },
                 {
+                    viewState.showLoading()
                     viewState.showError()
-                    Thread.sleep(3000)
-                    viewState.hideLoading()
-//                    Thread.sleep(1000)
-//                    onBackPressed()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        viewState.hideLoading()
+                        onBackPressed()
+                    }, 3000)
                 }
             )
     }

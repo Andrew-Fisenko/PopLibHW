@@ -20,8 +20,8 @@ class GitHubRepositoryImpl : GitHubRepository {
     }
 
     override fun getUser(): Single<GitHubUser> {
-        var i = (0..10).random()
-        return if (i <2) {
+        val i = (0..10).random()
+        return if (i < 5) {
             Single.create {
                 it.onSuccess(repositories[0])
             }
