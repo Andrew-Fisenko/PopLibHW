@@ -3,13 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".main.MainActivity">
 
     <FrameLayout
-        android:id="@+id/containerMain"
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible" />
+
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvGitHubUsers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
