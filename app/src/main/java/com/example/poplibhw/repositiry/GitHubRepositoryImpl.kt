@@ -14,13 +14,13 @@ class GitHubRepositoryImpl constructor(
             .map { it.map(UserMapper::mapToEntity) }
     }
 
-    override fun getUser(): Single<GitHubUser> {
-        TODO("Not yet implemented")
+    override fun getUser(): GitHubUser {
+        return GitHubUser(0, "", "")
     }
 
     override fun getUserById(login: String): Single<GitHubUser> {
-        val i = (0..10).random()
-        return if (i < 7) {
+        var i = (0..100).random()
+        return if (i < 90) {
             userApi.getUser(login)
                 .map(UserMapper::mapToEntity)
         } else {

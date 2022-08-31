@@ -4,16 +4,23 @@ import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+import java.net.URL
 
 @Parcelize
-data class GitHubUser(
+data class Repo(
     @Expose
     @SerializedName("id")
     val id: Int,
     @Expose
-    @SerializedName("login")
-    val login: String,
+    @SerializedName("name")
+    val name: String,
     @Expose
-    @SerializedName("avatar_url")
-    val avatarUrl: String?
+    @SerializedName("html_url")
+    val htmlUrl: URL,
+    @Expose
+    @SerializedName("language")
+    val language: String,
+    @Expose
+    @SerializedName("description")
+    val description: String,
 ) : Parcelable

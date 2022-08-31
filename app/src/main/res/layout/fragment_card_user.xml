@@ -6,19 +6,16 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <FrameLayout
-        android:id="@+id/frame"
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRepositories"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ProgressBar
-            android:id="@+id/progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="visible" />
-
-    </FrameLayout>
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_repo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserCard" />
 
     <ImageView
         android:id="@+id/ivUserCard"
@@ -40,5 +37,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivUserCard"
         tools:text="User's Name" />
+
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible" />
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

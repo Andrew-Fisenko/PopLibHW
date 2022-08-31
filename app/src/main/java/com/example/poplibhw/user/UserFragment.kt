@@ -23,22 +23,18 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener {
         }
     }
 
-    private var viewBingding: FragmentUserListBinding? = null
-
-    private val adapter = UserAdapter {
-        presenter.openCardUser(it)
-    }
-
+    private var viewBinding: FragmentUserListBinding? = null
 
     private val presenter: UserPresenter by moxyPresenter {
-        UserPresenter(GitHubRepositoryImpl(NetworkProvider.usersApi), PopLibHW.instance.router)
+        UserPresenter(
+            GitHubRepositoryImpl(NetworkProvider.usersApi),
+            PopLibHW.instance.router
+        )
     }
 
-//    private val adapter = UserAdapter(object : UserAdapter.OnItemViewClick {
-//        override fun onItemViewClick() {
-//            presenter.openCardUser(it)
-//        }
-//    })
+    private val adapter: UserAdapter by lazy {
+        UserAdapter(presenter::openCardUser)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,33 +42,33 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener {
         savedInstanceState: Bundle?
     ): View? {
         return FragmentUserListBinding.inflate(inflater, container, false).also {
-            viewBingding = it
+            viewBinding = it
         }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(viewBingding) {
+        with(viewBinding) {
             this?.rvGitHubUsers?.layoutManager = LinearLayoutManager(requireContext())
             this?.rvGitHubUsers?.adapter = adapter
         }
     }
 
     override fun initList(list: List<GitHubUser>) {
-        viewBingding?.apply {
-            adapter.users = list
+        viewBinding?.apply {
+        adapter.users = list
         }
     }
 
     override fun showLoading() {
-        viewBingding?.apply {
+        viewBinding?.apply {
             progress.visibility = View.VISIBLE
             frame.visibility = View.VISIBLE
         }
     }
 
     override fun hideLoading() {
-        viewBingding?.apply {
+        viewBinding?.apply {
             progress.visibility = View.GONE
             frame.visibility = View.GONE
         }
@@ -84,7 +80,7 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewBingding = null
+        viewBinding = null
     }
 
     override fun onBackPressed() = presenter.onBackPressed()

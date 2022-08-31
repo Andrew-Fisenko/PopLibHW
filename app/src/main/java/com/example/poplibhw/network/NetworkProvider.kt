@@ -11,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object NetworkProvider {
 
     val usersApi by lazy { createRetrofit().create(UserApi::class.java) }
+    val reposApi by lazy { createRetrofit().create(RepoApi::class.java) }
 
     private fun createGsonFactory() = GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -27,5 +28,4 @@ object NetworkProvider {
     fun createClient() = OkHttpClient
         .Builder()
         .build()
-
 }

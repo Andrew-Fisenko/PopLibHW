@@ -14,11 +14,6 @@ class UserAdapter(
     private val onUserClickListener: OnUserClickListener
 ) : RecyclerView.Adapter<UserAdapter.GitHubUserViewHolder>() {
 
-//    interface OnItemViewClick {
-//        fun onItemViewClick(user: GitHubUser)
-//    }
-
-
     var users: List<GitHubUser> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
@@ -44,17 +39,12 @@ class UserAdapter(
         private val onUserClickListener: OnUserClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
-//        private val tvLogin by lazy { itemView.findViewById<TextView>(R.id.tvUserLogin) }
-
         fun bind(item: GitHubUser) = with(binding) {
             tvUserLogin.text = item.login
             ivUserAvatar.loadImage(item.avatarUrl)
-            root.setOnClickListener{
+            root.setOnClickListener {
                 onUserClickListener.invoke(item.login)
             }
-        //            itemView.apply {
-//                setOnClickListener { onItemViewClick.onItemViewClick(item) }
-//            }
         }
     }
 }
