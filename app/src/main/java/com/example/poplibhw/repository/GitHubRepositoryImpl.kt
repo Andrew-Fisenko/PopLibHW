@@ -13,10 +13,10 @@ class GitHubRepositoryImpl constructor(
         return userApi.getAllUsers()
             .map { it.map(UserMapper::mapToEntity) }
     }
-
-    override fun getUser(): GitHubUser {
-        return GitHubUser(0, "", "")
-    }
+//
+//    override fun getUser(): GitHubUser {
+//        return GitHubUser(0, "", "")
+//    }
 
     override fun getUserByLogin(login: String): Single<GitHubUser> {
         return userApi.getUser(login)

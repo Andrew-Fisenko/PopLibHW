@@ -13,8 +13,7 @@ object NetworkProvider {
     val usersApi by lazy { createRetrofit().create(UserApi::class.java) }
     val reposApi by lazy { createRetrofit().create(RepoApi::class.java) }
 
-    private fun createGsonFactory() = GsonBuilder()
-        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+    private fun createGson() = GsonBuilder()
         .excludeFieldsWithoutExposeAnnotation()
         .create()
 
@@ -22,7 +21,7 @@ object NetworkProvider {
         .client(createClient())
         .baseUrl(BuildConfig.SERVER_URL)
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create(createGsonFactory()))
+        .addConverterFactory(GsonConverterFactory.create(createGson()))
         .build()
 
     fun createClient() = OkHttpClient

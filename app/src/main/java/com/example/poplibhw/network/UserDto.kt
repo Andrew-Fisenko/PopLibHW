@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-@Parcelize
+
 data class UserDto(
     @Expose
     @SerializedName("id")
@@ -16,4 +16,4 @@ data class UserDto(
     @Expose
     @SerializedName("avatar_url")
     val avatarUrl: String
-) : Parcelable
+)

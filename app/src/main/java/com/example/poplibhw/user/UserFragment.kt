@@ -25,15 +25,19 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener {
 
     private lateinit var viewBinding: FragmentUserListBinding
 
+
+
+    private val adapter = UserAdapter {
+        presenter.onItemClick(it)
+    }
+
+
+
     private val presenter: UserPresenter by moxyPresenter {
         UserPresenter(
             GitHubRepositoryImpl(NetworkProvider.usersApi),
             PopLibHW.instance.router
         )
-    }
-
-    private val adapter : UserAdapter by lazy {
-        UserAdapter(presenter::openCardUser)
     }
 
     override fun onCreateView(
@@ -46,33 +50,34 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener {
         }.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(viewBinding) {
-            this.rvGitHubUsers.layoutManager = LinearLayoutManager(requireContext())
-            this.rvGitHubUsers.adapter = adapter
+           rvGitHubUsers.layoutManager = LinearLayoutManager(requireContext())
+           rvGitHubUsers.adapter = adapter
         }
     }
 
 
     override fun initList(list: List<GitHubUser>) {
-        viewBinding.apply {
+
             adapter.users = list
-        }
+
     }
 
-    override fun showLoading() {
-        viewBinding.apply {
+    override fun showLoading() = with(viewBinding){
+
             progress.visibility = View.VISIBLE
             frame.visibility = View.VISIBLE
-        }
+
     }
 
-    override fun hideLoading() {
-        viewBinding.apply {
+    override fun hideLoading() = with(viewBinding){
+
             progress.visibility = View.GONE
             frame.visibility = View.GONE
-        }
+
     }
 
     override fun showError() {
