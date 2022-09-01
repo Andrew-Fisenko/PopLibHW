@@ -8,10 +8,10 @@ import com.example.poplibhw.databinding.ItemUserBinding
 import com.example.poplibhw.model.GitHubUser
 import com.example.poplibhw.utils.loadImage
 
-typealias OnUserClickListener = (login: String) -> Unit
+typealias OnItemViewClick = (login: String) -> Unit
 
 class UserAdapter(
-    private val onUserClickListener: OnUserClickListener
+    private val onItemViewClick: OnItemViewClick
 ) : RecyclerView.Adapter<UserAdapter.GitHubUserViewHolder>() {
 
     var users: List<GitHubUser> = emptyList()
@@ -25,7 +25,7 @@ class UserAdapter(
         val binding = ItemUserBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return GitHubUserViewHolder(binding, onUserClickListener)
+        return GitHubUserViewHolder(binding, onItemViewClick)
     }
 
     override fun onBindViewHolder(holder: GitHubUserViewHolder, position: Int) {
@@ -36,14 +36,14 @@ class UserAdapter(
 
     inner class GitHubUserViewHolder(
         private val binding: ItemUserBinding,
-        private val onUserClickListener: OnUserClickListener
+        private val onItemViewClick: OnItemViewClick
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: GitHubUser) = with(binding) {
             tvUserLogin.text = item.login
             ivUserAvatar.loadImage(item.avatarUrl)
             root.setOnClickListener {
-                onUserClickListener.invoke(item.login)
+                onItemViewClick.invoke(item.login)
             }
         }
     }

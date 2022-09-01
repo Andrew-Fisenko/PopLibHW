@@ -27,6 +27,7 @@ fun Disposable.disposeBy(bag: CompositeDisposable) {
     bag.add(this)
 }
 
+
 fun View.makeVisible() {
     this.visibility = View.VISIBLE
 }

@@ -10,7 +10,7 @@ import com.example.poplibhw.core.OnBackPressedListener
 import com.example.poplibhw.databinding.FragmentCardRepoBinding
 import com.example.poplibhw.model.Repo
 import com.example.poplibhw.network.NetworkProvider
-import com.example.poplibhw.repositiry.RepoRepositoryImpl
+import com.example.poplibhw.repository.RepoRepositoryImpl
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -72,23 +72,23 @@ class RepoFragment : MvpAppCompatFragment(), RepoView, OnBackPressedListener {
         }
     }
 
-    override fun showLoading() {
-        viewBinding?.apply {
-            progress.visibility = View.VISIBLE
-            frame.visibility = View.VISIBLE
-        }
-    }
-
-    override fun hideLoading() {
-        viewBinding?.apply {
-            progress.visibility = View.GONE
-            frame.visibility = View.GONE
-        }
-    }
-
-    override fun showError() {
-        Toast.makeText(context, "Error! Coming back...", Toast.LENGTH_SHORT).show()
-    }
+//    override fun showLoading() {
+//        viewBinding?.apply {
+//            progress.visibility = View.VISIBLE
+//            frame.visibility = View.VISIBLE
+//        }
+//    }
+//
+//    override fun hideLoading() {
+//        viewBinding?.apply {
+//            progress.visibility = View.GONE
+//            frame.visibility = View.GONE
+//        }
+//    }
+//
+//    override fun showError() {
+//        Toast.makeText(context, "Error! Coming back...", Toast.LENGTH_SHORT).show()
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

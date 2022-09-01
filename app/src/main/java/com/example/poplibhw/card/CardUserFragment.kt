@@ -1,6 +1,7 @@
 package com.example.poplibhw.card
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +17,11 @@ import com.example.poplibhw.model.GitHubUser
 import com.example.poplibhw.model.Repo
 import com.example.poplibhw.network.NetworkProvider
 import com.example.poplibhw.repo.RepoAdapter
-import com.example.poplibhw.repositiry.GitHubRepositoryImpl
-import com.example.poplibhw.repositiry.RepoRepositoryImpl
+import com.example.poplibhw.repository.GitHubRepositoryImpl
+import com.example.poplibhw.repository.RepoRepositoryImpl
 import com.example.poplibhw.utils.loadImage
+import com.example.poplibhw.utils.makeGone
+import com.example.poplibhw.utils.makeVisible
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -27,7 +30,7 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
     companion object {
         private const val ARG_LOGIN = "ARG_LOGIN"
 
-        fun getInstance(login: String): CardUserFragment {
+        fun getInstance(login : String) : CardUserFragment {
             return CardUserFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_LOGIN, login)
@@ -38,7 +41,7 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
 
     private var viewBinding: FragmentCardUserBinding? = null
 
-    private val presenter: CardUserPresenter by moxyPresenter {
+    private val presenter : CardUserPresenter by moxyPresenter {
         CardUserPresenter(
             GitHubRepositoryImpl(NetworkProvider.usersApi),
             RepoRepositoryImpl(NetworkProvider.reposApi),
@@ -46,7 +49,7 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
         )
     }
 
-    private val repoAdapter: RepoAdapter by lazy {
+    private val repoAdapter : RepoAdapter by lazy {
         RepoAdapter(presenter::openRepo)
     }
 
@@ -59,13 +62,14 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
             viewBinding = it
         }.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getString(ARG_LOGIN)?.let {
             presenter.loadUser(it)
         }
+
         viewBinding?.apply {
+            Log.d(tag, "Преобразование полученной информации")
             rvRepositories.layoutManager = LinearLayoutManager(requireContext())
             rvRepositories.addItemDecoration(
                 DividerItemDecoration(
@@ -87,6 +91,7 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
     }
 
     override fun initRepos(list: List<Repo>) {
+        Log.w(tag, "Началась загрузка репозиториев")
         repoAdapter.repos = list
         arguments?.getString(ARG_LOGIN)?.let {
             repoAdapter.login = it
@@ -95,17 +100,17 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
 
     override fun showLoading() {
         viewBinding?.apply {
-            progress.visibility = View.VISIBLE
-            ivUserCard.visibility = View.GONE
-            frame.visibility = View.VISIBLE
+            tvUserCard.makeGone()
+            ivUserCard.makeGone()
+            progress.makeVisible()
         }
     }
 
     override fun hideLoading() {
         viewBinding?.apply {
-            ivUserCard.visibility = View.VISIBLE
-            progress.visibility = View.GONE
-            frame.visibility = View.GONE
+            tvUserCard.makeVisible()
+            ivUserCard.makeVisible()
+            progress.makeGone()
         }
     }
 

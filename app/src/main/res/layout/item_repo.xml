@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@id/tvDescription"
+        app:layout_constraintBottom_toTopOf="@id/tvUrl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,10 +23,22 @@
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:textSize="11sp"
-        app:layout_constraintBottom_toTopOf="@id/tvDescription"
+
         app:layout_constraintEnd_toEndOf="@+id/tvName"
         app:layout_constraintStart_toStartOf="@+id/tvName"
         app:layout_constraintTop_toBottomOf="@+id/tvName"
+        tools:text="Full name" />
+
+    <!--TextView
+        android:id="@+id/tvLang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@id/tvDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUrl"
         tools:text="Full name" />
 
     <TextView
@@ -38,6 +50,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvName"
         app:layout_constraintStart_toStartOf="@+id/tvName"
-        tools:text="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Why do we use it?" />
+        tools:text=" " /-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,7 @@
 package com.example.poplibhw.user
 
 import com.example.poplibhw.core.navigation.CardUserScreen
-import com.example.poplibhw.repositiry.GitHubRepository
+import com.example.poplibhw.repository.GitHubRepository
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers

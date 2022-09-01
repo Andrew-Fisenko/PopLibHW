@@ -19,11 +19,9 @@ data class CardUserScreen(private val login: String) : FragmentScreen {
     }
 }
 
+
 data class RepoScreen(private val login: String, private val name: String) : FragmentScreen {
     override fun createFragment(factory: FragmentFactory): Fragment {
         return RepoFragment.getInstance(login, name)
     }
 }
-
-
-

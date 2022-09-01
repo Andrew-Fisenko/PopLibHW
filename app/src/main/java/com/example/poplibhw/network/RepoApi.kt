@@ -7,8 +7,8 @@ import retrofit2.http.Path
 interface RepoApi {
 
     @GET("/users/{login}/repos")
-    fun getRepos(@Path("login") login: String): Single<List<RepoDto>>
+    fun getUserRepos(@Path("login") login: String): Single<List<RepoDto>>
 
     @GET("/repos/{login}/{repo}")
-    fun getRepo(@Path("login") login: String, @Path("repo") repo: String): Single<RepoDto>
+    fun gerUserRepo(@Path("login") login: String, @Path("repo") repo: String): Single<RepoDto>
 }

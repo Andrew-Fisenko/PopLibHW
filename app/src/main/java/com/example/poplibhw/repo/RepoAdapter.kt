@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.poplibhw.databinding.ItemRepoBinding
 import com.example.poplibhw.model.Repo
 
-typealias OnRepoViewClick = (login: String, name: String) -> Unit
+typealias OnItemViewClick = (login: String, name: String) -> Unit
 
 class RepoAdapter(
-    private val onRepoViewClick: OnRepoViewClick
+    private var onItemViewClick: OnItemViewClick
 ) : RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {
 
     var repos: List<Repo> = emptyList()
@@ -24,14 +24,14 @@ class RepoAdapter(
 
     inner class RepoViewHolder(
         private val binding: ItemRepoBinding,
-        private val onRepoViewClick: OnRepoViewClick
+        private val onItemViewClick: OnItemViewClick
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(repo: Repo) = with(binding) {
             tvName.text = repo.name
             tvUrl.text = repo.htmlUrl.toString()
-            tvDescription.text = repo.description
+//            tvDescription.text = repo.description
             root.setOnClickListener {
-                onRepoViewClick.invoke(login, repo.name)
+                onItemViewClick.invoke(login, repo.name)
             }
         }
     }
@@ -40,7 +40,7 @@ class RepoAdapter(
         val binding = ItemRepoBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return RepoViewHolder(binding, onRepoViewClick)
+        return RepoViewHolder(binding, onItemViewClick)
     }
 
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
@@ -49,5 +49,3 @@ class RepoAdapter(
 
     override fun getItemCount() = repos.size
 }
-
-

@@ -2,7 +2,7 @@ package com.example.poplibhw.repo
 
 import android.os.Handler
 import android.os.Looper
-import com.example.poplibhw.repositiry.RepoRepository
+import com.example.poplibhw.repository.RepoRepository
 import com.example.poplibhw.utils.disposeBy
 import com.example.poplibhw.utils.subscribeByDefault
 import com.github.terrakok.cicerone.Router
@@ -19,17 +19,17 @@ class RepoPresenter(
     private val bag = CompositeDisposable()
 
     fun loadRepo(login: String, name: String) {
-        repoRepository.getReposByLogin(login, name)
+        repoRepository.getRepoByName(login, name)
             .subscribeByDefault()
             .delay(1, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
             .subscribe(
                 {
                     viewState.initRepo(it)
-                    viewState.hideLoading()
+//                    viewState.hideLoading()
                 },
                 {
-                    viewState.showLoading()
-                    viewState.showError()
+//                    viewState.showLoading()
+//                    viewState.showError()
                     Handler(Looper.getMainLooper()).postDelayed({
                         onBackPressed()
                     }, 3000)

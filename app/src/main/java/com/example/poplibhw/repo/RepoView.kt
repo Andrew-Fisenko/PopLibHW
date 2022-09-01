@@ -9,7 +9,7 @@ import moxy.viewstate.strategy.StateStrategyType
 interface RepoView : MvpView {
 
     fun initRepo(repo: Repo)
-    fun showLoading()
-    fun hideLoading()
-    fun showError()
+//    fun showLoading()
+//    fun hideLoading()
+//    fun showError()
 }

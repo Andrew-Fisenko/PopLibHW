@@ -1,4 +1,4 @@
-package com.example.poplibhw.repositiry
+package com.example.poplibhw.repository
 
 import com.example.poplibhw.mapper.UserMapper
 import com.example.poplibhw.model.GitHubUser
@@ -18,16 +18,18 @@ class GitHubRepositoryImpl constructor(
         return GitHubUser(0, "", "")
     }
 
-    override fun getUserById(login: String): Single<GitHubUser> {
-        var i = (0..100).random()
-        return if (i < 90) {
-            userApi.getUser(login)
-                .map(UserMapper::mapToEntity)
-        } else {
-            Single.create {
-                it.onError(error("Error!"))
-            }
-        }
+    override fun getUserByLogin(login: String): Single<GitHubUser> {
+        return userApi.getUser(login)
+            .map(UserMapper::mapToEntity)
+//        var i = (0..100).random()
+//        return if (i < 90) {
+//            userApi.getUser(login)
+//                .map(UserMapper::mapToEntity)
+//        } else {
+//            Single.create {
+//                it.onError(error("Error!"))
+//            }
+//        }
     }
 }
 
