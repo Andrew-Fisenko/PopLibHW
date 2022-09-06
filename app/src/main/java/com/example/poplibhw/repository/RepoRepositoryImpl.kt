@@ -6,7 +6,7 @@ import com.example.poplibhw.network.RepoApi
 import io.reactivex.rxjava3.core.Single
 
 class RepoRepositoryImpl constructor(
-    private val repoApi : RepoApi
+    private val repoApi: RepoApi
 ) : RepoRepository {
 
     override fun getReposByUserLogin(login: String): Single<List<Repo>> {

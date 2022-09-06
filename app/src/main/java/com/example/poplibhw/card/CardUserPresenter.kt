@@ -1,7 +1,5 @@
 package com.example.poplibhw.card
 
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import com.example.poplibhw.core.navigation.RepoScreen
 import com.example.poplibhw.repository.GitHubRepository

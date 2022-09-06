@@ -19,17 +19,17 @@ class GitHubRepositoryImpl constructor(
 //    }
 
     override fun getUserByLogin(login: String): Single<GitHubUser> {
-        return userApi.getUser(login)
-            .map(UserMapper::mapToEntity)
-//        var i = (0..100).random()
-//        return if (i < 90) {
-//            userApi.getUser(login)
-//                .map(UserMapper::mapToEntity)
-//        } else {
-//            Single.create {
-//                it.onError(error("Error!"))
-//            }
-//        }
+//        return userApi.getUser(login)
+//            .map(UserMapper::mapToEntity)
+        val i = (0..100).random()
+        return if (i < 90) {
+            userApi.getUser(login)
+                .map(UserMapper::mapToEntity)
+        } else {
+            Single.create {
+                it.onError(error("Error!"))
+            }
+        }
     }
 }
 

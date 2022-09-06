@@ -10,15 +10,15 @@ import com.example.poplibhw.model.Repo
 typealias OnItemViewClick = (login: String, name: String) -> Unit
 
 class RepoAdapter(
-private var onItemViewClick: OnItemViewClick
+    private var onItemViewClick: OnItemViewClick
 ) : RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {
 
     var repos: List<Repo> = emptyList()
-    @SuppressLint("NotifyDataSetChanged")
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+        @SuppressLint("NotifyDataSetChanged")
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     lateinit var login: String
 
@@ -28,8 +28,8 @@ private var onItemViewClick: OnItemViewClick
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(repo: Repo) = with(binding) {
             tvName.text = repo.name
-//            tvUrl.text = repo.htmlUrl.toString()
-//            tvDescription.text = repo.description
+            tvUrl.text = repo.htmlUrl.toString()
+            tvDescription.text = repo.description
             root.setOnClickListener {
                 onItemViewClick.invoke(login, repo.name)
             }

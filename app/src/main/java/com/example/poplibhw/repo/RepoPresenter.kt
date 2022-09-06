@@ -25,11 +25,11 @@ class RepoPresenter(
             .subscribe(
                 {
                     viewState.initRepo(it)
-//                    viewState.hideLoading()
+                    viewState.hideLoading()
                 },
                 {
-//                    viewState.showLoading()
-//                    viewState.showError()
+                    viewState.showLoading()
+                    viewState.showError()
                     Handler(Looper.getMainLooper()).postDelayed({
                         onBackPressed()
                     }, 3000)

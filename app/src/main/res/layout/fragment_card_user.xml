@@ -10,13 +10,10 @@
         android:id="@+id/rvRepositories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/item_repo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUserCard" />
-
-
-
+        app:layout_constraintTop_toBottomOf="@+id/tvUserCard"
+        tools:listitem="@layout/item_repo" />
 
     <ImageView
         android:id="@+id/ivUserCard"
@@ -24,10 +21,10 @@
         android:layout_height="150dp"
         android:layout_marginTop="30dp"
         android:src="@drawable/ic_placeholder_user"
+        app:layout_constraintBottom_toTopOf="@+id/tvUserCard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/tvUserCard"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvUserCard"
@@ -40,9 +37,6 @@
         app:layout_constraintTop_toBottomOf="@id/ivUserCard"
         tools:text="User's Name" />
 
-
-
-
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="100dp"
@@ -51,4 +45,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

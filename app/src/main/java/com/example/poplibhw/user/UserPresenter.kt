@@ -1,6 +1,5 @@
 package com.example.poplibhw.user
 
-import android.util.Log
 import com.example.poplibhw.core.navigation.CardUserScreen
 import com.example.poplibhw.repository.GitHubRepository
 import com.github.terrakok.cicerone.Router
@@ -29,7 +28,6 @@ class UserPresenter(
                 },
                 {
                     viewState.showError()
-                    Log.e("USER_LIST", it.message ?: "!!!")
                 }
             )
     }

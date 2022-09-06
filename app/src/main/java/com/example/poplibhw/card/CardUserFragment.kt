@@ -1,7 +1,6 @@
 package com.example.poplibhw.card
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +29,7 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
     companion object {
         private const val ARG_LOGIN = "ARG_LOGIN"
 
-        fun getInstance(login : String) : CardUserFragment {
+        fun getInstance(login: String): CardUserFragment {
             return CardUserFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_LOGIN, login)
@@ -41,7 +40,7 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
 
     private var viewBinding: FragmentCardUserBinding? = null
 
-    private val presenter : CardUserPresenter by moxyPresenter {
+    private val presenter: CardUserPresenter by moxyPresenter {
         CardUserPresenter(
             GitHubRepositoryImpl(NetworkProvider.usersApi),
             RepoRepositoryImpl(NetworkProvider.reposApi),
@@ -49,7 +48,7 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
         )
     }
 
-    private val repoAdapter : RepoAdapter by lazy {
+    private val repoAdapter: RepoAdapter by lazy {
         RepoAdapter(presenter::openRepo)
     }
 
@@ -62,6 +61,7 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
             viewBinding = it
         }.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getString(ARG_LOGIN)?.let {
@@ -69,7 +69,6 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
         }
 
         viewBinding?.apply {
-            Log.d(tag, "Преобразование полученной информации")
             rvRepositories.layoutManager = LinearLayoutManager(requireContext())
             rvRepositories.addItemDecoration(
                 DividerItemDecoration(
@@ -91,7 +90,6 @@ class CardUserFragment : MvpAppCompatFragment(), CardUserView, OnBackPressedList
     }
 
     override fun initRepos(list: List<Repo>) {
-        Log.w(tag, "Началась загрузка репозиториев")
         repoAdapter.repos = list
         arguments?.getString(ARG_LOGIN)?.let {
             repoAdapter.login = it

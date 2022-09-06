@@ -68,32 +68,29 @@ class RepoFragment : MvpAppCompatFragment(), RepoView, OnBackPressedListener {
             tvLang.text = repo.language
             tvUrl.text = repo.htmlUrl.toString()
             tvDesc.text = repo.description
-
         }
     }
 
-//    override fun showLoading() {
-//        viewBinding?.apply {
-//            progress.visibility = View.VISIBLE
-//            frame.visibility = View.VISIBLE
-//        }
-//    }
-//
-//    override fun hideLoading() {
-//        viewBinding?.apply {
-//            progress.visibility = View.GONE
-//            frame.visibility = View.GONE
-//        }
-//    }
-//
-//    override fun showError() {
-//        Toast.makeText(context, "Error! Coming back...", Toast.LENGTH_SHORT).show()
-//    }
+    override fun showLoading() {
+        viewBinding?.apply {
+            progress.visibility = View.VISIBLE
+            frame.visibility = View.VISIBLE
+        }
+    }
+
+    override fun hideLoading() {
+        viewBinding?.apply {
+            progress.visibility = View.GONE
+            frame.visibility = View.GONE
+        }
+    }
+
+    override fun showError() {
+        Toast.makeText(context, "Error! Coming back...", Toast.LENGTH_SHORT).show()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         viewBinding = null
     }
-
-
 }

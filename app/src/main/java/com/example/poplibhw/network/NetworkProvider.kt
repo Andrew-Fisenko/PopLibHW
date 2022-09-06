@@ -1,7 +1,6 @@
 package com.example.poplibhw.network
 
 import com.example.poplibhw.BuildConfig
-import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
