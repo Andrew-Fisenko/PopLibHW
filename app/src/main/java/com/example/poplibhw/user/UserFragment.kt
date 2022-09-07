@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.poplibhw.PopLibHW
 import com.example.poplibhw.core.OnBackPressedListener
 import com.example.poplibhw.databinding.FragmentUserListBinding
-import com.example.poplibhw.main.UserAdapter
 import com.example.poplibhw.model.GitHubUser
-import com.example.poplibhw.repositiry.GitHubRepositoryImpl
+import com.example.poplibhw.network.NetworkProvider
+import com.example.poplibhw.repository.GitHubRepositoryImpl
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -23,46 +23,47 @@ class UserFragment : MvpAppCompatFragment(), UserView, OnBackPressedListener {
         }
     }
 
-    private lateinit var viewBingding: FragmentUserListBinding
+    private lateinit var viewBinding: FragmentUserListBinding
 
-    private val presenter: UserPresenter by moxyPresenter {
-        UserPresenter(GitHubRepositoryImpl(), PopLibHW.instance.router)
+    private val adapter = UserAdapter {
+        presenter.onItemClick(it)
     }
 
-    private val adapter = UserAdapter(object : UserAdapter.OnItemViewClick {
-        override fun onItemViewClick(user: GitHubUser) {
-            presenter.openCardUser(user)
-        }
-    })
+    private val presenter: UserPresenter by moxyPresenter {
+        UserPresenter(
+            GitHubRepositoryImpl(NetworkProvider.usersApi),
+            PopLibHW.instance.router
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return FragmentUserListBinding.inflate(inflater, container, false).also {
-            viewBingding = it
+            viewBinding = it
         }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(viewBingding) {
-            this.rvGitHubUsers.layoutManager = LinearLayoutManager(requireContext())
-            this.rvGitHubUsers.adapter = adapter
+        with(viewBinding) {
+            rvGitHubUsers.layoutManager = LinearLayoutManager(requireContext())
+            rvGitHubUsers.adapter = adapter
         }
     }
 
     override fun initList(list: List<GitHubUser>) {
-           adapter.users = list
+        adapter.users = list
     }
 
-    override fun showLoading() = with(viewBingding) {
+    override fun showLoading() = with(viewBinding) {
         progress.visibility = View.VISIBLE
         frame.visibility = View.VISIBLE
     }
 
-    override fun hideLoading() = with(viewBingding) {
+    override fun hideLoading() = with(viewBinding) {
         progress.visibility = View.GONE
         frame.visibility = View.GONE
     }
